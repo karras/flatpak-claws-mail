@@ -1,0 +1,13 @@
+---
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t karras/flatpak .
+
+script:
+  - docker run --privileged -it karras/flatpak /bin/sh -c "git clone https://github.com/karras/flatpak-claws-mail /root/flatpak-claws-mail; flatpak-builder build /root/flatpak-claws-mail/org.clawsmail.Claws.json"
